@@ -7,7 +7,6 @@
 #include <assert.h>
 using namespace std;
 #define DEBUG
-#define PINNED
 
 bool readFile(int16_t* read, const char* filePath);
 bool saveFile(int16_t* write, const char* filePath);
