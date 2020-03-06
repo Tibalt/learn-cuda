@@ -179,6 +179,9 @@ int main(int argc, char *argv[])
 
     float ms; // elapsed time in milliseconds
 
+#ifdef STREAM
+
+
     checkCuda( cudaEventRecord(startEvent,stream[nStreams-1]) );
     clock_gettime(CLOCK_MONOTONIC, &time1);
     for(int i=0;i<1000;i+=nStreams){
@@ -209,8 +212,10 @@ int main(int argc, char *argv[])
     cout<<diff(time1,time2).tv_sec<<":"<<diff(time1,time2).tv_nsec<<endl;
 
     printf("stream with %d calculation is done\n",nStreams);
+#endif
 
 
+#ifdef NULLSTREAM
 
     clock_gettime(CLOCK_MONOTONIC, &time1);
     checkCuda( cudaEventRecord(startEvent,0) );
@@ -234,6 +239,7 @@ int main(int argc, char *argv[])
     clock_gettime(CLOCK_MONOTONIC, &time2);
     printf("Time for NULL stream transfer and execute (ms): %f     ", ms);
     cout<<diff(time1,time2).tv_sec<<":"<<diff(time1,time2).tv_nsec<<endl;
+#endif
 
 
 
